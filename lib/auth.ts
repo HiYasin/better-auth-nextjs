@@ -9,5 +9,7 @@ export const auth = betterAuth({
     }),
     emailAndPassword: {
         enabled: true,
+        autoSignIn: true
+        // If you want to enable auto sign in after sign up, set this to true
     }
 });

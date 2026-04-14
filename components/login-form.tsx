@@ -15,7 +15,6 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import Link from "next/link"
 import { FormEvent, useState } from "react"
 
 import {
@@ -24,6 +23,9 @@ import {
   AlertTitle,
 } from "@/components/ui/alert"
 import { InfoIcon } from "lucide-react"
+import { signIn } from "@/lib/auth-client"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export function LoginForm({
   className,
@@ -37,9 +39,24 @@ export function LoginForm({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-    console.log(email, password);
+
+    const result = await signIn.email({
+      email,
+      password,
+      callbackURL: "/dashboard",
+      // rememberMe: false
+      // Set rememberMe to true if you want to create a persistent session (optional, defaults to false)
+    }, {
+      onError: (ctx) => {
+        setError(ctx.error.message);
+      },
+    });
+    if(!result.error){
+      setError("");
+    }
+    setLoading(false);
   }
+
 
 
   return (

@@ -24,6 +24,8 @@ import {
   AlertTitle,
 } from "@/components/ui/alert"
 import { InfoIcon } from "lucide-react"
+import { signUp } from "@/lib/auth-client"
+import { useRouter } from "next/navigation"
 
 export function SignupForm({
   className,
@@ -35,11 +37,24 @@ export function SignupForm({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    console.log(name, email, password);
+    try {
+      setLoading(true);
+      const result = await signUp.email({
+        email,
+        password,
+        name,
+      });
+      console.log(result);
+      router.push("/dashboard");
+    } catch (error: any) {
+      setError(error.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   }
 
 
