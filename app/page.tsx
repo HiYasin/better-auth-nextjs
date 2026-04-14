@@ -1,19 +1,28 @@
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-export default function Page() {
+export default function Home() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="w-full max-w-md space-y-6 p-6">
+        <div className="space-y-2 text-center">
+          <h1 className="text-3xl font-bold">Better Auth Tutorial</h1>
+          <p className="text-muted-foreground">
+            Learn how to implement forgot password functionality
+          </p>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
+        <div className="flex flex-col gap-3">
+          <Button asChild>
+            <Link href="/login">Login</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/signup">Sign Up</Link>
+          </Button>
+          <Button asChild variant="secondary">
+            <Link href="/dashboard">Dashboard (Protected)</Link>
+          </Button>
         </div>
       </div>
     </div>
-  )
+  );
 }
