@@ -1,10 +1,10 @@
-import { ForgetPasswordForm } from "@/components/forget-pass";
+import { ForgotPasswordForm } from "@/components/forgot-pass";
 
 export default function Page() {
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
-        <ForgetPasswordForm />
+        <ForgotPasswordForm />
       </div>
     </div>
   )
